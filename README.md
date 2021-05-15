@@ -1,2 +1,2 @@
 # Vue-Firebase
-In this part of Vue course we connected Vue 3 to our code and initialized Vue
+We learned how to dynamically render variables in Vue, how to use Vue data() and Vue methods
