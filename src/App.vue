@@ -2,7 +2,7 @@
   <h1>{{title}}</h1>
   <input type="text" ref="name">
   <button @click="handleClick">Click me!</button>
-  <Modal />
+  <Modal :header="header" :text="text" theme="sale"/>
 </template>
 
 <script>
@@ -14,7 +14,9 @@ export default {
   components: { Modal },
   data() {
     return {
-      title: 'Слава богу я атеист'
+      title: 'Слава богу я атеист',
+      header: 'Sign up for the Giweaway!',
+      text: "Hello brothers!!! And goodbye..."
     }
   },
   methods: {
