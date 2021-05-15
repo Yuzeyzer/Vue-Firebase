@@ -1,2 +1,2 @@
 # Vue-Firebase
-This is Vue + Firebase course for my students from Kyrgyzstan and Russia
+In this part of Vue course we connected Vue 3 to our code and initialized Vue
