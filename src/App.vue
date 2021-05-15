@@ -2,13 +2,17 @@
   <h1>{{title}}</h1>
   <input type="text" ref="name">
   <button @click="handleClick">Click me!</button>
+  <Modal />
 </template>
 
 <script>
 
+import Modal from './components/Modal.vue';
+
 export default {
   name: 'App',
-  data: function () {
+  components: { Modal },
+  data() {
     return {
       title: 'Слава богу я атеист'
     }
