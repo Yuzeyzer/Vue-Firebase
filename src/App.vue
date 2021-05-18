@@ -1,8 +1,10 @@
 <template>
   <h1>{{title}}</h1>
-  <input type="text" ref="name">
-  <button @click="handleClick">Click me!</button>
-  <Modal :header="header" :text="text" theme="sale"/>
+  <p>Welcome...</p>
+  <div v-if="showModal">
+    <Modal :header="header" :text="text" theme="sale" @close="toggleModal"/>
+  </div>
+  <button @click="toggleModal">Show Modal!</button>
 </template>
 
 <script>
@@ -16,14 +18,13 @@ export default {
     return {
       title: 'Слава богу я атеист',
       header: 'Sign up for the Giweaway!',
-      text: "Hello brothers!!! And goodbye..."
+      text: "Hello brothers!!! And goodbye...",
+      showModal: false
     }
   },
   methods: {
-    handleClick() {
-      console.log(this.$refs.name)
-      const input = this.$refs.name;
-      input.classList.add('active')
+    toggleModal() {
+     this.showModal = !this.showModal;
     }
   }
 }
