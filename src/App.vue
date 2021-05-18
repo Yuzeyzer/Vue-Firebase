@@ -2,7 +2,15 @@
   <h1>{{title}}</h1>
   <p>Welcome...</p>
   <div v-if="showModal">
-    <Modal :header="header" :text="text" theme="sale" @close="toggleModal"/>
+    <Modal theme="sale" @close="toggleModal">
+      <h1>{{header}}</h1>
+      <p>{{text}}</p>
+      <template v-slot:links>
+        <a href="#">Sign Up now</a>
+        <a href="#">More Info</a>
+      </template>
+    </Modal>
+    
   </div>
   <button @click="toggleModal">Show Modal!</button>
 </template>
@@ -16,7 +24,6 @@ export default {
   components: { Modal },
   data() {
     return {
-      title: 'Слава богу я атеист',
       header: 'Sign up for the Giweaway!',
       text: "Hello brothers!!! And goodbye...",
       showModal: false
