@@ -1,37 +1,25 @@
 <template>
-  <h1>{{title}}</h1>
-  <p>Welcome...</p>
-  <div v-if="showModal">
-    <Modal theme="sale" @close="toggleModal">
-      <h1>{{header}}</h1>
-      <p>{{text}}</p>
-      <template v-slot:links>
-        <a href="#">Sign Up now</a>
-        <a href="#">More Info</a>
-      </template>
-    </Modal>
-    
-  </div>
-  <button @click="toggleModal">Show Modal!</button>
+  <h1>Привет мир</h1>
+  <button @click="start" :disabled="isPlaying">Click me</button>
+  <Block v-if="isPlaying" :delay="delay"/>
 </template>
 
 <script>
-
-import Modal from './components/Modal.vue';
+import Block from './components/Block'
 
 export default {
   name: 'App',
-  components: { Modal },
+  components: { Block, },
   data() {
     return {
-      header: 'Sign up for the Giweaway!',
-      text: "Hello brothers!!! And goodbye...",
-      showModal: false
+      isPlaying: false,
+      delay: null
     }
   },
   methods: {
-    toggleModal() {
-     this.showModal = !this.showModal;
+    start() {
+      this.delay = 2000 + Math.random() * 5000;
+      this.isPlaying = true;
     }
   }
 }
