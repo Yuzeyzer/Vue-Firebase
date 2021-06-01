@@ -1,38 +1,20 @@
 <template>
-  <h1>{{title}}</h1>
-  <p>Welcome...</p>
-  <div v-if="showModal">
-    <Modal theme="sale" @close="toggleModal">
-      <h1>{{header}}</h1>
-      <p>{{text}}</p>
-      <template v-slot:links>
-        <a href="#">Sign Up now</a>
-        <a href="#">More Info</a>
-      </template>
-    </Modal>
-    
-  </div>
-  <button @click="toggleModal">Show Modal!</button>
+  <SignUpForm />
 </template>
 
 <script>
 
-import Modal from './components/Modal.vue';
+import SignUpForm  from './components/SignUpForm'
 
 export default {
   name: 'App',
-  components: { Modal },
+  components: {  SignUpForm},
   data() {
     return {
-      header: 'Sign up for the Giweaway!',
-      text: "Hello brothers!!! And goodbye...",
-      showModal: false
+     
     }
   },
   methods: {
-    toggleModal() {
-     this.showModal = !this.showModal;
-    }
   }
 }
 </script>
@@ -45,5 +27,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+body {
+  margin: 0;
+  background-color: #ccc;
 }
 </style>
