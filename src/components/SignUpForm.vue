@@ -1,9 +1,10 @@
 <template>
-  <form action="">
+  <form @submit.prevent="handleSubmit">
     <label for="">Email:</label>
     <input type="email" required v-model="email" />
     <label for="">Password:</label>
-    <input type="password" required v-model="password" />
+    <input type="password" required hidden="false" v-model="password" />
+    <div class="error" v-if="passwordError">{{ passwordError }}</div>
     <label for="">Role:</label>
     <select v-model="role">
       <option value="developer">Web Developer</option>
@@ -17,6 +18,9 @@
     <div class="terms">
       <input type="checkbox" required v-model="terms" />
       <label for="">Accept terms and conditions</label>
+    </div>
+    <div class="submit">
+      <button>Create an Account</button>
     </div>
   </form>
   <p>Email: {{ email }}</p>
@@ -35,6 +39,7 @@ export default {
       terms: false,
       tempSkill: "",
       skills: [],
+      passwordError: "",
     };
   },
   methods: {
@@ -46,9 +51,24 @@ export default {
         this.tempSkill = "";
       }
     },
-		deleteSkill(skill) {
-			this.skills = this.skills.filter(item => item !== skill)
-		}
+    deleteSkill(skill) {
+      this.skills = this.skills.filter((item) => item !== skill);
+    },
+    handleSubmit() {
+      this.passwordError =
+        this.password.length > 5
+          ? ""
+          : "Password should be at least 6 characters long";
+      if (!this.passwordError) {
+        console.log({
+          email: this.email,
+          password: this.password,
+          role: this.role,
+          terms: this.terms,
+          skills: this.skills,
+        });
+      }
+    },
   },
 };
 </script>
@@ -99,5 +119,23 @@ input[type="checkbox"] {
   font-weight: 700;
   color: #777;
   cursor: pointer;
+}
+button {
+  background-color: #0b6dff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.submit {
+  text-align: center;
+}
+.error {
+  color: #ff0062;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: 700;
 }
 </style>
