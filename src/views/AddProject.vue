@@ -17,8 +17,22 @@ export default {
     };
   },
   methods: {
-    handleSubmiit() {
-      console.log(this.title, this.details);
+    async handleSubmiit() {
+      try {
+        let project = {
+          title: this.title,
+          details: this.details,
+          complete: false,
+        };
+        await fetch("http://localhost:3000/projects", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(project),
+        });
+        await this.$router.push("/");
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
 };
@@ -62,6 +76,6 @@ form button {
   border: none;
   border-radius: 6px;
   font-size: 16px;
-	cursor: pointer;
+  cursor: pointer;
 }
 </style>
