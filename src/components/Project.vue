@@ -1,11 +1,11 @@
 <template>
-  <div class="project">
+  <div class="project" :class="{ completed: project.complete }">
     <div class="actions">
       <h3 @click="toggleShowDetails">{{ project.title }}</h3>
       <div class="icons">
         <span class="material-icons">edit</span>
         <span @click="deleteProject" class="material-icons">delete</span>
-        <span class="material-icons">done</span>
+        <span @click="toggleComplete" class="material-icons tick">done</span>
       </div>
     </div>
     <div v-if="showDetails" class="details">
@@ -30,6 +30,14 @@ export default {
     async deleteProject() {
       await fetch(this.uri, { method: "DELETE" });
       this.$emit("delete", this.project.id);
+    },
+    async toggleComplete() {
+      await fetch(this.uri, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ complete: !this.project.complete }),
+      });
+      this.$emit("update", this.project.id);
     },
   },
 };
@@ -60,5 +68,11 @@ export default {
 }
 .material-icons:hover {
   color: #777;
+}
+.project.completed {
+  border-left: 4px solid #00ce89;
+}
+.project.completed .tick {
+  color: #00ce89;
 }
 </style>
