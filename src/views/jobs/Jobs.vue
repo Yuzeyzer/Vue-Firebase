@@ -11,23 +11,7 @@
 export default {
   data() {
     return {
-      jobs: [
-        {
-          id: 1,
-          title: "Frontend Разработчик",
-          details: "Нужен Frontend Разработчик на работу в Yandex",
-        },
-        {
-          id: 2,
-          title: "Backend Разработчик",
-          details: "Нужен Backend Разработчик в Ош базар",
-        },
-        {
-          id: 3,
-          title: "Full - Stack Разработчик",
-          details: "Нужен Full - Stack Разработчик в Google",
-        },
-      ],
+      jobs: [],
     };
   },
 };
@@ -44,9 +28,9 @@ export default {
   color: #444;
 }
 .job h2:hover {
-	background-color: #ddd;
+  background-color: #ddd;
 }
 .job a {
-	text-decoration: none;
+  text-decoration: none;
 }
 </style>
