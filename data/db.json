@@ -1,19 +1,16 @@
 {
-	"jobs": [
+	"projects": [
 		{
 			"id": 1,
-			"title": "Frontend Разработчик",
-			"details": "Нужен Frontend Разработчик на работу в Yandex"
+			"title": "Построить дом",
+			"details": "Необходимо построить дом на улице Шевченко",
+			"complete": false
 		},
 		{
 			"id": 2,
-			"title": "Backend Разработчик",
-			"details": "Нужен Backend Разработчик в Ош базар"
-		},
-		{
-			"id": 3,
-			"title": "Full - Stack Разработчик",
-			"details": "Нужен Full - Stack Разработчик в Google"
+			"title": "Купить новую обувь",
+			"details": "Необходимо купить новую обувь",
+			"complete": true
 		}
 	]
 }
