@@ -14,6 +14,18 @@ export default {
       jobs: [],
     };
   },
+  mounted() {
+    const fetchingData = async () => {
+      try {
+        const data = await fetch("http://localhost:3000/jobs");
+        const json = await data.json();
+        this.jobs = json;
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchingData();
+  },
 };
 </script>
 
