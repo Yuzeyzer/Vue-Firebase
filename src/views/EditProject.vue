@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="handleSubmiit">
     <label for="">Название задачи:</label>
     <input type="text" required v-model="title" />
     <label for="">Описание:</label>
@@ -18,11 +18,20 @@ export default {
       uri: "http://localhost:3000/projects/" + this.id,
     };
   },
+  methods: {
+    async handleSubmiit() {
+      await fetch(this.uri, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: this.title, details: this.details }),
+      });
+      await this.$router.push({ name: "Home" });
+    },
+  },
   mounted() {
     const fetchData = async () => {
       const response = await fetch(this.uri);
       const json = await response.json();
-      console.log(json);
       this.title = json.title;
       this.details = json.details;
     };
