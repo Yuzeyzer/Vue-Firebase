@@ -1,0 +1,22 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Построить дом",
+      "details": "Необходимо построить дом на улице Шевченко",
+      "complete": true
+    },
+    {
+      "title": "Наказать Аки",
+      "details": "За косяки и другие проблемы",
+      "complete": true,
+      "id": 2
+    },
+    {
+      "title": "retr",
+      "details": "werter",
+      "complete": false,
+      "id": 3
+    }
+  ]
+}
