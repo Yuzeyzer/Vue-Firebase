@@ -5,7 +5,7 @@
       @filterChange="currentFilter = $event"
     />
     <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id">
+      <div v-for="project in filteredProjects" :key="project.id">
         <Project
           @update="handleUpdate"
           @delete="handleDelete"
@@ -44,6 +44,17 @@ export default {
       .then((response) => response.json())
       .then((data) => (this.projects = data))
       .catch((error) => console.error(error));
+  },
+  computed: {
+    filteredProjects() {
+      if (this.currentFilter === "completed") {
+        return this.projects.filter((project) => project.complete);
+      }
+      if (this.currentFilter === "ongoing") {
+        return this.projects.filter((project) => !project.complete);
+      }
+      return this.projects;
+    },
   },
 };
 </script>
