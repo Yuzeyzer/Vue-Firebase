@@ -5,11 +5,12 @@
     <div v-for="name in matchingNames" :key="name">
       {{ name }}
     </div>
+    <button @click="handleStopClick">Остановить вызов Слежек/Подписок</button>
   </div>
 </template>
 
 <script>
-import { ref, computed,watch, watchEffect } from "vue";
+import { ref, computed, watch, watchEffect } from "vue";
 
 export default {
   name: "Home",
@@ -24,19 +25,24 @@ export default {
     ]);
     const search = ref("");
 
-    watch(search, () => {
-      console.log('Запуск слежки')
-    })
+    const stopWatch = watch(search, () => {
+      console.log("Запуск слежки");
+    });
 
-    watchEffect(() => {
-      console.log('Запуск слежки эффекта')
-    })
+    const stopEffect = watchEffect(() => {
+      console.log("Запуск слежки эффекта");
+    });
+
+    const handleStopClick = () => {
+      stopWatch();
+      stopEffect();
+    };
 
     const matchingNames = computed(() => {
       return names.value.filter((name) => name.includes(search.value));
     });
 
-    return { names, search, matchingNames };
+    return { names, search, matchingNames, handleStopClick };
   },
 };
 </script>
