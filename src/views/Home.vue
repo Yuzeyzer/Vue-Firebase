@@ -1,10 +1,11 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <PostsList :posts="posts" />
+    <PostsList v-if="showPosts" :posts="posts" />
+    <button @click="showPosts = !showPosts">Показать/Скрыть посты</button>
+    <button @click="posts.pop()">Удалить пост</button>
   </div>
 </template>
-
 <script>
 import { ref } from "vue";
 import PostsList from "../components/PostsList.vue";
@@ -25,7 +26,9 @@ export default {
         body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestias non asperiores corporis necessitatibus repudiandae delectus optio, consequatur ad, illo praesentium corrupti minus nisi, facilis nesciunt architecto ut aliquid omnis rerum adipisci natus esse. Error beatae dolorem sunt reiciendis suscipit, ea sit! Odio nam libero aperiam consequuntur officiis, commodi quibusdam!",
       },
     ]);
-    return { posts };
+
+    const showPosts = ref(true);
+    return { posts, showPosts };
   },
 };
 </script>
