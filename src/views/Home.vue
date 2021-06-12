@@ -1,48 +1,31 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <input type="text" v-model="search" />
-    <div v-for="name in matchingNames" :key="name">
-      {{ name }}
-    </div>
-    <button @click="handleStopClick">Остановить вызов Слежек/Подписок</button>
+    <PostsList :posts="posts" />
   </div>
 </template>
 
 <script>
-import { ref, computed, watch, watchEffect } from "vue";
+import { ref } from "vue";
+import PostsList from "../components/PostsList.vue";
 
 export default {
   name: "Home",
+  components: { PostsList },
   setup() {
-    const names = ref([
-      "Сейтек",
-      "Бекжан",
-      "Али",
-      "Аки",
-      "Аэлина",
-      "Кочкорбек",
+    const posts = ref([
+      {
+        id: 1,
+        title: "Добро пожаловать в Блог",
+        body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestias non asperiores corporis necessitatibus repudiandae delectus optio, consequatur ad, illo praesentium corrupti minus nisi, facilis nesciunt architecto ut aliquid omnis rerum adipisci natus esse. Error beatae dolorem sunt reiciendis suscipit, ea sit! Odio nam libero aperiam consequuntur officiis, commodi quibusdam!",
+      },
+      {
+        id: 2,
+        title: "5 CSS свойств которые спасут вам жизнь!!!",
+        body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestias non asperiores corporis necessitatibus repudiandae delectus optio, consequatur ad, illo praesentium corrupti minus nisi, facilis nesciunt architecto ut aliquid omnis rerum adipisci natus esse. Error beatae dolorem sunt reiciendis suscipit, ea sit! Odio nam libero aperiam consequuntur officiis, commodi quibusdam!",
+      },
     ]);
-    const search = ref("");
-
-    const stopWatch = watch(search, () => {
-      console.log("Запуск слежки");
-    });
-
-    const stopEffect = watchEffect(() => {
-      console.log("Запуск слежки эффекта");
-    });
-
-    const handleStopClick = () => {
-      stopWatch();
-      stopEffect();
-    };
-
-    const matchingNames = computed(() => {
-      return names.value.filter((name) => name.includes(search.value));
-    });
-
-    return { names, search, matchingNames, handleStopClick };
+    return { posts };
   },
 };
 </script>
