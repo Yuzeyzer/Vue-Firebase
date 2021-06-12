@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed,watch, watchEffect } from "vue";
 
 export default {
   name: "Home",
@@ -23,6 +23,14 @@ export default {
       "Кочкорбек",
     ]);
     const search = ref("");
+
+    watch(search, () => {
+      console.log('Запуск слежки')
+    })
+
+    watchEffect(() => {
+      console.log('Запуск слежки эффекта')
+    })
 
     const matchingNames = computed(() => {
       return names.value.filter((name) => name.includes(search.value));
