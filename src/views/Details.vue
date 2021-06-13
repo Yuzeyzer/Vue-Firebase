@@ -8,13 +8,15 @@
 </template>
 
 <script>
+import { useRoute } from "vue-router";
 import getPost from "@/composables/getPost";
 import Spinner from "../components/Spinner.vue";
+
 export default {
-  props: ["id"],
   components: { Spinner },
-  setup(props) {
-    const { post, error, fetchBody } = getPost(props.id);
+  setup() {
+    const route = useRoute();
+    const { post, error, fetchBody } = getPost(route.params.id);
     fetchBody();
     return { post, error };
   },

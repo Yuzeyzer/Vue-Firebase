@@ -15,7 +15,7 @@
 
 <script>
 import { ref } from "@vue/reactivity";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 export default {
   setup() {
