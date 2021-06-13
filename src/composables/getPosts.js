@@ -6,11 +6,7 @@ const getPosts = () => {
 
   const fetchBody = async () => {
     try {
-
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1000);
-      });
-
+  
       const response = await fetch('http://localhost:3000/posts');
 
       if (!response.ok) {
@@ -18,6 +14,8 @@ const getPosts = () => {
       }
 
       posts.value = await response.json();
+
+      console.log(posts.value);
     } catch (e) {
       error.value = e.message;
       console.log(error.value);
