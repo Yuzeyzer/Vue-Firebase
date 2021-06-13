@@ -1,6 +1,6 @@
 <template>
   <div class="create">
-    <form>
+    <form @submit.prevent="handleSubmit">
       <label>Заголовок:</label>
       <input type="text" required v-model="title" />
       <label>Контент: </label>
@@ -31,7 +31,23 @@ export default {
       tag.value = "";
     };
 
-    return { title, body, tag, tags, handleAddTag };
+    const handleSubmit = async () => {
+      try {
+        await fetch("http://localhost:3000/posts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: title.value,
+            body: body.value,
+            tags: tags.value,
+          }),
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    return { title, body, tag, tags, handleAddTag, handleSubmit };
   },
 };
 </script>
@@ -61,7 +77,7 @@ label {
   font-size: 20px;
   color: white;
   margin-bottom: 10px;
-	padding: 2px 0;
+  padding: 2px 0;
 }
 label::before {
   content: "";
@@ -70,7 +86,7 @@ label::before {
   height: 100%;
   background: #ff8800;
   position: absolute;
-	top: 0;
+  top: 0;
   z-index: -1;
   padding-right: 40px;
   left: -30px;
@@ -84,7 +100,7 @@ button {
   border: none;
   padding: 8px 16px;
   font-size: 18px;
-	cursor: pointer;
+  cursor: pointer;
 }
 .pill {
   display: inline-block;
