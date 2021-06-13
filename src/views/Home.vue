@@ -5,7 +5,7 @@
     <div v-if="posts.length">
       <PostsList v-if="showPosts" :posts="posts" />
     </div>
-    <div v-else>Идет загрузка данных...</div>
+    <div v-else><Spinner /></div>
     <button @click="showPosts = !showPosts">Показать/Скрыть посты</button>
     <button @click="posts.pop()">Удалить пост</button>
   </div>
@@ -13,11 +13,12 @@
 <script>
 import { onMounted, ref } from "vue";
 import PostsList from "../components/PostsList.vue";
+import Spinner from "../components/Spinner.vue";
 import getPosts from "@/composables/getPosts";
 
 export default {
   name: "Home",
-  components: { PostsList },
+  components: { PostsList, Spinner },
   setup() {
     const { posts, error, fetchBody } = getPosts();
 
