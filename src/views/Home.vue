@@ -1,34 +1,45 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <PostsList v-if="showPosts" :posts="posts" />
+    <div v-if="error">{{ error }}</div>
+    <div v-if="posts.length">
+      <PostsList v-if="showPosts" :posts="posts" />
+    </div>
+    <div v-else>Идет загрузка данных...</div>
     <button @click="showPosts = !showPosts">Показать/Скрыть посты</button>
     <button @click="posts.pop()">Удалить пост</button>
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import PostsList from "../components/PostsList.vue";
 
 export default {
   name: "Home",
   components: { PostsList },
   setup() {
-    const posts = ref([
-      {
-        id: 1,
-        title: "Добро пожаловать в Блог",
-        body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestias non asperiores corporis necessitatibus repudiandae delectus optio, consequatur ad, illo praesentium corrupti minus nisi, facilis nesciunt architecto ut aliquid omnis rerum adipisci natus esse. Error beatae dolorem sunt reiciendis suscipit, ea sit! Odio nam libero aperiam consequuntur officiis, commodi quibusdam!",
-      },
-      {
-        id: 2,
-        title: "5 CSS свойств которые спасут вам жизнь!!!",
-        body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestias non asperiores corporis necessitatibus repudiandae delectus optio, consequatur ad, illo praesentium corrupti minus nisi, facilis nesciunt architecto ut aliquid omnis rerum adipisci natus esse. Error beatae dolorem sunt reiciendis suscipit, ea sit! Odio nam libero aperiam consequuntur officiis, commodi quibusdam!",
-      },
-    ]);
+    const posts = ref([]);
+    const error = ref(null);
+
+    const fetchingPosts = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/posts");
+
+        if (!response.ok) {
+          throw Error("No data available");
+        }
+
+        posts.value = await response.json();
+      } catch (e) {
+        error.value = e.message;
+        console.log(error.value);
+      }
+    };
+
+    onMounted(() => fetchingPosts());
 
     const showPosts = ref(true);
-    return { posts, showPosts };
+    return { posts, showPosts, error };
   },
 };
 </script>
