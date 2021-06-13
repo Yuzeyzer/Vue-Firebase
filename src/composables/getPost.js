@@ -7,7 +7,7 @@ const getPost = (id) => {
   const fetchBody = async () => {
     try {
       await new Promise((resolve) => {
-        setTimeout(resolve, 2000);
+        setTimeout(resolve, 1000);
       });
 
       const response = await fetch('http://localhost:3000/posts/' + id);
