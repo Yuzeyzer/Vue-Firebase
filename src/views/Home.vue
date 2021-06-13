@@ -13,32 +13,18 @@
 <script>
 import { onMounted, ref } from "vue";
 import PostsList from "../components/PostsList.vue";
+import getPosts from "@/composables/getPosts";
 
 export default {
   name: "Home",
   components: { PostsList },
   setup() {
-    const posts = ref([]);
-    const error = ref(null);
+    const { posts, error, fetchBody } = getPosts();
 
-    const fetchingPosts = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/posts");
-
-        if (!response.ok) {
-          throw Error("No data available");
-        }
-
-        posts.value = await response.json();
-      } catch (e) {
-        error.value = e.message;
-        console.log(error.value);
-      }
-    };
-
-    onMounted(() => fetchingPosts());
+    onMounted(() => fetchBody());
 
     const showPosts = ref(true);
+
     return { posts, showPosts, error };
   },
 };
