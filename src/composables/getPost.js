@@ -1,4 +1,5 @@
 import { ref } from 'vue';
+import firestore from '../firebase/config';
 
 const getPost = (id) => {
   const post = ref(null);
@@ -6,17 +7,15 @@ const getPost = (id) => {
 
   const fetchBody = async () => {
     try {
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1000);
-      });
+      const response = await firestore
+        .collection('blogs')
+        .doc(id)
+        .get();
 
-      const response = await fetch('http://localhost:3000/posts/' + id);
-
-      if (!response.ok) {
-        throw Error('No data available');
+      if (!response.exists) {
+				throw new Error('Такого блога нет')
       }
-
-      post.value = await response.json();
+      post.value = { ...response.data(), id };
     } catch (e) {
       error.value = e.message;
       console.log(error.value);
