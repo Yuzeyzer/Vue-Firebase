@@ -15,7 +15,6 @@ const getPosts = () => {
 
       posts.value = await response.json();
 
-      console.log(posts.value);
     } catch (e) {
       error.value = e.message;
       console.log(error.value);

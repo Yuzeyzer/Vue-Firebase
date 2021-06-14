@@ -1,9 +1,11 @@
 <template>
   <div class="home">
     <h1>Home</h1>
+
     <div v-if="error">{{ error }}</div>
     <div v-if="posts.length">
       <PostsList v-if="showPosts" :posts="posts" />
+      <TagsCloud :posts="posts" />
     </div>
     <div v-else><Spinner /></div>
     <button @click="showPosts = !showPosts">Показать/Скрыть посты</button>
@@ -14,11 +16,12 @@
 import { onMounted, ref } from "vue";
 import PostsList from "../components/PostsList.vue";
 import Spinner from "../components/Spinner.vue";
+import TagsCloud from "../components/TagsCloud.vue";
 import getPosts from "@/composables/getPosts";
 
 export default {
   name: "Home",
-  components: { PostsList, Spinner },
+  components: { PostsList, Spinner, TagsCloud },
   setup() {
     const { posts, error, fetchBody } = getPosts();
 
