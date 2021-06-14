@@ -15,7 +15,8 @@
 
 <script>
 import { ref } from "@vue/reactivity";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
+import firestore from "../firebase/config";
 
 export default {
   setup() {
@@ -36,15 +37,15 @@ export default {
 
     const handleSubmit = async () => {
       try {
-        await fetch("http://localhost:3000/posts", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            title: title.value,
-            body: body.value,
-            tags: tags.value,
-          }),
-        });
+        const newPost = {
+          title: title.value,
+          body: body.value,
+          tags: tags.value,
+        };
+        const response = await firestore.collection("blogs").add(newPost);
+
+        console.log(response);
+				
         router.push({ name: "Home" });
       } catch (e) {
         console.log(e);
