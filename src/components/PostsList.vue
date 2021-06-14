@@ -13,6 +13,7 @@ export default {
   components: { SinglePost },
   props: ["posts"],
   setup(props) {
+		console.log(props.posts)
     onMounted(() => console.log("Монтирование Компонента"));
     onUnmounted(() => console.log("Размонтирование Компонента"));
     onUpdated(() => console.log("Обновление Компонента"));

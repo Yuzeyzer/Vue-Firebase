@@ -1,6 +1,8 @@
 <template>
   <Navbar />
-  <router-view />
+  <div class="container">
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -19,5 +21,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 30px;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
 }
 </style>

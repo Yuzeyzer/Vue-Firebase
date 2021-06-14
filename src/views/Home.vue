@@ -1,9 +1,8 @@
 <template>
-  <div class="home">
+  <div class="home container">
     <h1>Home</h1>
-
     <div v-if="error">{{ error }}</div>
-    <div v-if="posts.length">
+    <div v-if="posts.length" class="grid">
       <PostsList v-if="showPosts" :posts="posts" />
       <TagsCloud :posts="posts" />
     </div>
@@ -35,9 +34,9 @@ export default {
 </script>
 
 <style>
-.home {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px;
+.grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
 }
 </style>

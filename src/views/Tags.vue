@@ -1,7 +1,8 @@
 <template>
   <div v-if="error">{{ error }}</div>
-  <div v-if="filteredTags.length" class="tag">
+  <div v-if="filteredTags.length" class="tag grid">
     <PostsList :posts="filteredTags" />
+    <TagsCloud :posts="posts" />
   </div>
   <div v-else><Spinner /></div>
 </template>
@@ -10,10 +11,11 @@
 import { useRoute } from "vue-router";
 import getPosts from "@/composables/getPosts";
 import PostsList from "@/components/PostsList.vue";
+import TagsCloud from "../components/TagsCloud.vue";
 import Spinner from "@/components/Spinner.vue";
 import { computed, onMounted } from "@vue/runtime-core";
 export default {
-  components: { PostsList, Spinner },
+  components: { PostsList, Spinner, TagsCloud },
   setup() {
     const route = useRoute();
     const tag = route.params.tag;
@@ -27,7 +29,7 @@ export default {
       fetchBody();
     });
 
-    return { filteredTags, error };
+    return { filteredTags, error, posts };
   },
 };
 </script>
