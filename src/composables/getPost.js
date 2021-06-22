@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import firestore from '../firebase/config';
+import {firestore} from '../firebase/config';
 
 const getPost = (id) => {
   const post = ref(null);

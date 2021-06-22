@@ -16,7 +16,7 @@
 <script>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-import firestore from "../firebase/config";
+import { firestore, timestamp } from "../firebase/config";
 
 export default {
   setup() {
@@ -41,12 +41,11 @@ export default {
           title: title.value,
           body: body.value,
           tags: tags.value,
+          createdAt: timestamp(),
         };
         const response = await firestore.collection("blogs").add(newPost);
 
-        console.log(response);
-				
-        router.push({ name: "Home" });
+        router.push("/");
       } catch (e) {
         console.log(e);
       }

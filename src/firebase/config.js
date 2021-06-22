@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDhkxg_yTJ1AUZNwSMjJtn6DBycHU-uUL0',
@@ -8,10 +8,11 @@ const firebaseConfig = {
   storageBucket: 'vue-firebase-a3b98.appspot.com',
   messagingSenderId: '619164694098',
   appId: '1:619164694098:web:a6e05b169475b9bcc4518b',
-};
+}
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig)
 
-const firestore = firebase.firestore();
+const firestore = firebase.firestore()
+const timestamp = firebase.firestore.FieldValue.serverTimestamp
 
-export default firestore;
+export { firestore, timestamp }
