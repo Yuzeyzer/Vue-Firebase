@@ -7,8 +7,6 @@
       <TagsCloud :posts="posts" />
     </div>
     <div v-else><Spinner /></div>
-    <button @click="showPosts = !showPosts">Показать/Скрыть посты</button>
-    <button @click="posts.pop()">Удалить пост</button>
   </div>
 </template>
 <script>

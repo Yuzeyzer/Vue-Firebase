@@ -7,7 +7,10 @@ const getPosts = () => {
 
   const fetchBody = async () => {
     try {
-      const response = await firestore.collection('blogs').get()
+      const response = await firestore
+        .collection('blogs')
+        .orderBy('createdAt', 'desc')
+        .get()
       posts.value = response.docs.map((doc) => {
         return { ...doc.data(), id: doc.id }
       })
