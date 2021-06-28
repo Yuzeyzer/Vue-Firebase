@@ -12,10 +12,10 @@ const signup = async (email, password, name) => {
       throw new Error(`Невозможно провести регистрацию`)
     }
 
-    await response.updateProfile({ displayName: name })
+    await response.user.updateProfile({ displayName: name })
     error.value = null
 
-    console.log(response.user)
+		return response
   } catch (err) {
     console.log(err.message)
     error.value = err.message

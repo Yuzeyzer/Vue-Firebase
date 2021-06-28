@@ -6,7 +6,7 @@
       <SignUpForm />
       <p>
         Already registered?
-        <span @click="showLoginForm = true">Login</span> instead.
+        <span @click="showLoginForm = false">Login</span> instead.
       </p>
     </div>
     <div v-else>
@@ -14,7 +14,7 @@
       <LoginForm />
       <p>
         No account yet?
-        <span @click="showLoginForm = false">Signup</span> instead.
+        <span @click="showLoginForm = true">Signup</span> instead.
       </p>
     </div>
   </div>
