@@ -1,8 +1,22 @@
 <template>
   <div class="welcome container">
     <p>Welcome</p>
-    <SignUpForm v-if="showForm" />
-    <LoginForm v-else/>
+    <div v-if="showLoginForm">
+      <h2>Login</h2>
+      <SignUpForm />
+      <p>
+        No account yet?
+        <span @click="showLoginForm = false">Signup</span> instead.
+      </p>
+    </div>
+    <div v-else>
+      <h2>Sign up</h2>
+      <LoginForm />
+      <p>
+        Already registered?
+        <span @click="showLoginForm = true">Login</span> instead.
+      </p>
+    </div>
   </div>
 </template>
 
@@ -13,9 +27,9 @@ import { ref } from "@vue/reactivity";
 export default {
   components: { SignUpForm, LoginForm },
   setup() {
-    const showForm = ref(true);
+    const showLoginForm = ref(true);
 
-    return {showForm}
+    return { showLoginForm };
   },
 };
 </script>
