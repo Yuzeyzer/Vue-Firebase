@@ -2,19 +2,19 @@
   <div class="welcome container">
     <p>Welcome</p>
     <div v-if="showLoginForm">
-      <h2>Login</h2>
-      <SignUpForm />
-      <p>
-        No account yet?
-        <span @click="showLoginForm = false">Signup</span> instead.
-      </p>
-    </div>
-    <div v-else>
       <h2>Sign up</h2>
-      <LoginForm />
+      <SignUpForm />
       <p>
         Already registered?
         <span @click="showLoginForm = true">Login</span> instead.
+      </p>
+    </div>
+    <div v-else>
+      <h2>Login</h2>
+      <LoginForm />
+      <p>
+        No account yet?
+        <span @click="showLoginForm = false">Signup</span> instead.
       </p>
     </div>
   </div>
