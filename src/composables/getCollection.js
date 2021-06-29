@@ -1,15 +1,16 @@
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { firestore } from '@/firebase/config'
 
 const getCollection =  (collection) => {
   const documents = ref(null)
   const error = ref(null)
 
-  let collectionRef = firestore.collection(collection).orderBy('createdAt')
+  const collectionRef = firestore.collection(collection).orderBy('createdAt')
 
-  collectionRef.onSnapshot(
+  const unsub = collectionRef.onSnapshot(
     (snap) => {
       let result = []
+      console.log('SNAP')
       snap.docs.forEach((doc) => {
         doc.data().createdAt && result.push({ ...doc.data(), id: doc.id })
       })
@@ -22,6 +23,10 @@ const getCollection =  (collection) => {
       error.value = 'Не возможно получить данные'
     },
   )
+
+  watchEffect((onInvalidate) =>{
+    onInvalidate(() => unsub());
+  })
   return { documents, error }
 }
 
