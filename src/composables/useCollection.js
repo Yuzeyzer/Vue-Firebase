@@ -14,7 +14,7 @@ const useCollection = (collection) => {
     }
   }
 
-  return { addDoc }
+  return { addDoc, error }
 }
 
 export default useCollection
