@@ -22,11 +22,11 @@ export default {
 
     const handleSubmit = async () => {
 
-			
+
       const chat = {
         name: user.value.displayName,
         message: message.value,
-        createdAd: timestamp(),
+        createdAt: timestamp(),
       };
 
 
