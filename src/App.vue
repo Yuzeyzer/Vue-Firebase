@@ -12,10 +12,9 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin-top: 30px;
+.content {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
 }
 </style>
