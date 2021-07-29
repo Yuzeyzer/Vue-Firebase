@@ -8,7 +8,8 @@
 			v-model="description"
 		></textarea>
 		<label>Upload playlist cover image</label>
-		<input type="file" />
+		<input type="file" @change="handleChange" />
+		<div class="error">{{ fileError }}</div>
 		<button>Create</button>
 	</form>
 </template>
@@ -19,12 +20,29 @@ export default {
 	setup() {
 		const title = ref("");
 		const description = ref("");
+		const file = ref("");
+		const fileError = ref("");
+
+		const imgTypes = ["image/png", "image/jpeg", "image/jpg"];
 
 		const handleSubmit = () => {
-			console.log(title.value, description.value);
+			if (file.value) {
+        console.log(title.value, description.value, file.value);
+      }
 		};
 
-		return { title, description, handleSubmit };
+		const handleChange = (event) => {
+			const selectedFile = event.target.files[0];
+			if (selectedFile && imgTypes.includes(selectedFile.type)) {
+				file.value = selectedFile;
+				fileError.value = null;
+			} else {
+				fileError.value = " Please select an image file (png/jpeg/jpg)";
+				file.value = null;
+			}
+		};
+
+		return { title, description, fileError, handleSubmit, handleChange };
 	},
 };
 </script>
@@ -36,6 +54,9 @@ form {
 input[type="file"] {
 	border: 0;
 	padding: 0;
+}
+textarea {
+	resize: none;
 }
 label {
 	font-size: 12px;
