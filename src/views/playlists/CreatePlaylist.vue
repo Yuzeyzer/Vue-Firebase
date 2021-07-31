@@ -10,7 +10,8 @@
 		<label>Upload playlist cover image</label>
 		<input type="file" @change="handleChange" />
 		<div class="error">{{ fileError }}</div>
-		<button>Create</button>
+		<button v-if="!isPending">Create</button>
+		<button v-else disabled>Saving...</button>
 	</form>
 </template>
 
@@ -31,11 +32,13 @@ export default {
 		const description = ref("");
 		const file = ref("");
 		const fileError = ref("");
+		const isPending = ref(false);
 
 		const imgTypes = ["image/png", "image/jpeg", "image/jpg"];
 
 		const handleSubmit = async () => {
 			if (file.value) {
+				isPending.value = true;
 				await uploadImage(file.value);
 				await addDoc({
 					title: title.value,
@@ -48,11 +51,13 @@ export default {
 					createdAt: timestamp(),
 				});
 
-        if (!error.value) {
-          	title.value = ''
-        		description.value = ''
-        		file.value = ''
-        }
+				isPending.value = false;
+
+				if (!error.value) {
+					title.value = "";
+					description.value = "";
+					file.value = "";
+				}
 			}
 		};
 
@@ -67,7 +72,7 @@ export default {
 			}
 		};
 
-		return { title, description, fileError, handleSubmit, handleChange };
+		return { title, description, fileError, handleSubmit, handleChange,isPending };
 	},
 };
 </script>
