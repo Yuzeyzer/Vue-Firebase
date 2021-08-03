@@ -4,6 +4,7 @@
 			<img src="@/assets/logo.png" />
 			<h1><router-link :to="{ name: 'Home' }">Muic</router-link></h1>
 			<div class="links">
+				<router-link v-if="user" :to="{name: 'CreatePlaylist'}">Create Playlist</router-link>
 				<button v-if="user" @click="handleLogOut">Log Out</button>
 				<div v-else>
 					<router-link class="btn" :to="{ name: 'Signup' }"
