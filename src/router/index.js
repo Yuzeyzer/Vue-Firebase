@@ -3,33 +3,42 @@ import Home from '../views/Home'
 import Login from '../views/auth/Login'
 import Signup from '../views/auth/Signup'
 import CreatePlaylist from '../views/playlists/CreatePlaylist'
+import { auth } from '../firebase/config'
+
+const requireAuth = (to, from, next) => {
+	let user = auth.currentUser
+	if (!user) return next({ name: 'Login' })
+  return next()
+}
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-  },
-  {
-    path: '/signup',
-    name: 'Signup',
-    component: Signup,
-  },
-  {
-    path: '/playlists/create',
-    name: 'CreatePlaylist',
-    component: CreatePlaylist,
-  }
+	{
+		path: '/',
+		name: 'Home',
+		component: Home,
+    beforeEnter: requireAuth,
+	},
+	{
+		path: '/login',
+		name: 'Login',
+		component: Login,
+	},
+	{
+		path: '/signup',
+		name: 'Signup',
+		component: Signup,
+	},
+	{
+		path: '/playlists/create',
+		name: 'CreatePlaylist',
+		component: CreatePlaylist,
+		beforeEnter: requireAuth,
+	},
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+	history: createWebHistory(process.env.BASE_URL),
+	routes,
 })
 
 export default router
