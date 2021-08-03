@@ -40,6 +40,7 @@ const routes = [
 		name: 'PlaylistDetails',
 		component: CreatePlaylist,
 		beforeEnter: requireAuth,
+    props: true
 	},
 ]
 
