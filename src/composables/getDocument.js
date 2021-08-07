@@ -9,7 +9,7 @@ const getDocument = (collection,id) => {
   let documentRef = firestore.collection(collection).doc(id)
 
   const unsub = documentRef.onSnapshot(
-    (snap) => {
+    (doc) => {
       if (doc.data()) {
         document.value =  {...doc.data(), id: doc.id}
         error.value = null
