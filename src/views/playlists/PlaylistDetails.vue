@@ -1,10 +1,10 @@
 <template>
-  <h1>PlaylistsDetails</h1>
+  <h1>PlaylistsDetails ID: {{id}}</h1>
 </template>
 
 <script>
 export default {
-
+  props: ['id']
 }
 </script>
 

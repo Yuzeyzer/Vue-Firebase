@@ -9,7 +9,12 @@ const useCollection = (collection) => {
     error.value = null
 
     try {
-      await firestore.collection(collection).add(doc)
+      const res =  await firestore.collection(collection).add(doc)
+
+      error.value = null
+
+      return res
+      
     } catch (err) {
       console.log(err.message)
       error.value = 'could not send the message'
