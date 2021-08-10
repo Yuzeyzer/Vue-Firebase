@@ -12,11 +12,13 @@
 		</div>
 		<div class="song-list">
 			<p>Song List Here</p>
+			<AddSong v-if="ownership" :playlist="playlist" />
 		</div>
 	</div>
 </template>
 
 <script>
+import AddSong from "@/components/AddSong";
 import getDocument from "@/composables/getDocument";
 import useDocument from "@/composables/useDocument";
 import useStorage from "@/composables/useStorage";
@@ -25,6 +27,7 @@ import { computed } from "@vue/runtime-core";
 
 export default {
 	props: ["id"],
+	components: { AddSong },
 	setup(props) {
 		const { document: playlist, error } = getDocument("playlists", props.id);
 		const { deleteDoc } = useDocument("playlists", props.id);
@@ -38,7 +41,7 @@ export default {
 		});
 
 		const handleDelete = async () => {
-      await deleteImage(playlist.value.filePath);
+			await deleteImage(playlist.value.filePath);
 			await deleteDoc();
 		};
 		return { playlist, error, ownership, handleDelete };
@@ -63,10 +66,8 @@ export default {
 	position: absolute;
 	top: 0;
 	left: 0;
-	min-width: 100%;
-	min-height: 100%;
-	max-width: 200%;
-	max-height: 200%;
+	width: 100%;
+	height: 100%;
 }
 .playlist-info {
 	text-align: center;
