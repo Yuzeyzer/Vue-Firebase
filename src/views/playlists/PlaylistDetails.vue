@@ -19,6 +19,7 @@
 <script>
 import getDocument from "@/composables/getDocument";
 import useDocument from "@/composables/useDocument";
+import useStorage from "@/composables/useStorage";
 import getUser from "@/composables/getUser";
 import { computed } from "@vue/runtime-core";
 
@@ -27,6 +28,7 @@ export default {
 	setup(props) {
 		const { document: playlist, error } = getDocument("playlists", props.id);
 		const { deleteDoc } = useDocument("playlists", props.id);
+		const { deleteImage } = useStorage();
 		const { user } = getUser();
 
 		const ownership = computed(() => {
@@ -35,10 +37,11 @@ export default {
 			);
 		});
 
-    const handleDelete = async () => {
-       await deleteDoc()
-    }
-		return { playlist, error, ownership,handleDelete };
+		const handleDelete = async () => {
+      await deleteImage(playlist.value.filePath);
+			await deleteDoc();
+		};
+		return { playlist, error, ownership, handleDelete };
 	},
 };
 </script>
